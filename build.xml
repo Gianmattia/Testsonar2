@@ -11,10 +11,14 @@
     <path id="Testtravis2.classpath">
         <pathelement location="bin"/>
     </path>
+    <path id="run.Hello (3).classpath">
+        <path refid="Testtravis2.classpath"/>
+    </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -45,5 +49,10 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
+    </target>
+    <target name="Hello (3)">
+        <java classname="Hello" failonerror="true" fork="yes">
+            <classpath refid="run.Hello (3).classpath"/>
+        </java>
     </target>
 </project>
