@@ -3,22 +3,21 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Testtravis2">
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="prova2">
     <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse/java-2020-092/eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="14"/>
-    <property name="source" value="14"/>
-    <path id="Testtravis2.classpath">
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="prova2.classpath">
         <pathelement location="bin"/>
-    </path>
-    <path id="run.Hello (3).classpath">
-        <path refid="Testtravis2.classpath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.launch"/>
+                <exclude name="**/*.xtend"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -33,7 +32,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <classpath refid="Testtravis2.classpath"/>
+            <classpath refid="prova2.classpath"/>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
@@ -50,9 +49,9 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Hello (3)">
-        <java classname="Hello" failonerror="true" fork="yes">
-            <classpath refid="run.Hello (3).classpath"/>
+    <target name="FirstFX1">
+        <java classname="prova2.FirstFX1" failonerror="true" fork="yes">
+            <classpath refid="prova2.classpath"/>
         </java>
     </target>
 </project>
